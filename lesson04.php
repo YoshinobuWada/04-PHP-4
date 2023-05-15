@@ -47,29 +47,29 @@ function yokotable($set, $a)
             array_push($text, $Wsum . '</td>');
             $text1 = implode("", $text);
         }
-    } else if($set == 4){
-        if($a <= 3 && $a >=1){
-        for($i = 1 ; $i <= 3 ; $i++){
-            $y = 'r' . $i;
-            $z = 'c' . $a;
-            $Hsum = $Hsum + $arr[$y][$z];
-        }
-        for($x = $Hsum ; $x <= 99 ; $x = $x * 10 ){
-            array_push($text, "_");
-        }
-        array_push($text, $Hsum.'</td>');
-        $text1 = implode("", $text);
-    } else if($a == 4){
-        foreach($arr as $value){
-            foreach($value as $value1){
-                $Hsum = $Hsum + $value1;
+    } else if ($set == 4) {
+        if ($a <= 3 && $a >= 1) {
+            for ($i = 1; $i <= 3; $i++) {
+                $y = 'r' . $i;
+                $z = 'c' . $a;
+                $Hsum = $Hsum + $arr[$y][$z];
             }
+            for ($x = $Hsum; $x <= 99; $x = $x * 10) {
+                array_push($text, "_");
+            }
+            array_push($text, $Hsum . '</td>');
+            $text1 = implode("", $text);
+        } else if ($a == 4) {
+            foreach ($arr as $value) {
+                foreach ($value as $value1) {
+                    $Hsum = $Hsum + $value1;
+                }
+            }
+            array_push($text, '__' . $Hsum . '</td>');
+            $text1 = implode("", $text);
         }
-        array_push($text, '__'.$Hsum.'</td>');
-        $text1 = implode("", $text);
     }
-    }
-    return $text1;   
+    return $text1;
 }
 
 ?>

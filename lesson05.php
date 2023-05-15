@@ -69,15 +69,17 @@ function straightJudge($cards)
         return true;
     } else {
         return false;
-    }   
+    }
 }
 
-function tehuda_suit($i){
+function tehuda_suit($i)
+{
     $suit_name = filter_input(INPUT_POST, "suit$i");
     return $suit_name;
 }
 
-function tehuda_number($i){
+function tehuda_number($i)
+{
     $hand_number = filter_input(INPUT_POST, "number$i");
     return $hand_number;
 }
@@ -89,23 +91,24 @@ function hand($i)
     $a = null;
     $suit_name = filter_input(INPUT_POST, "suit$i");
     $hand_number = filter_input(INPUT_POST, "number$i");
-    $a = $suit_name.$hand_number;
+    $a = $suit_name . $hand_number;
     return $a;
 }
 // 判定
- function judge($handsuit, $handnum, $hand_arr){
-// この関数内に処理を記述
+function judge($handsuit, $handnum, $hand_arr)
+{
+    // この関数内に処理を記述
 // カードの不正チェック
-$cards_count1 = array_count_values($hand_arr);
-$max = max($cards_count1);
-for($i = 0 ; $i <= 4 ; $i ++){   
-    if($handnum[$i] <= 0 || $handnum[$i] >= 14 ||  $max > 1){
-        return "手札は不正です。";
-    }   
-    if($handsuit[$i] != 'heart' && $handsuit[$i] != 'spade' && $handsuit[$i] != 'diamond' && $handsuit[$i] != 'club'){
-        return "手札は不正です。";
+    $cards_count1 = array_count_values($hand_arr);
+    $max = max($cards_count1);
+    for ($i = 0; $i <= 4; $i++) {
+        if ($handnum[$i] <= 0 || $handnum[$i] >= 14 || $max > 1) {
+            return "手札は不正です。";
+        }
+        if ($handsuit[$i] != 'heart' && $handsuit[$i] != 'spade' && $handsuit[$i] != 'diamond' && $handsuit[$i] != 'club') {
+            return "手札は不正です。";
+        }
     }
-}
     // カードの並び替え
     sort($handnum);
 
@@ -117,31 +120,31 @@ for($i = 0 ; $i <= 4 ; $i ++){
     $max2 = max($cards_count2);
     $max3 = max($cards_count3);
     $min2 = min($cards_count2);
-    if($frash && $handnum[0] == 1 &&$handnum[1] == 10 && $handnum[2] == 11 && $handnum[3] == 12 && $handnum[4] == 13 ){
-        return"役はロイヤルストレートフラッシュです";
+    if ($frash && $handnum[0] == 1 && $handnum[1] == 10 && $handnum[2] == 11 && $handnum[3] == 12 && $handnum[4] == 13) {
+        return "役はロイヤルストレートフラッシュです";
     }
-    if($frash && $straight){
+    if ($frash && $straight) {
         return "役はストレートフラッシュです";
     }
-    if($max2 == 4){
+    if ($max2 == 4) {
         return "役はフォーカードです";
     }
-    if($max2 == 3 && $min2 == 2){
+    if ($max2 == 3 && $min2 == 2) {
         return "役はフルハウスです";
     }
-    if($frash){
+    if ($frash) {
         return "役はフラッシュです";
-        }
-    if($straight){
+    }
+    if ($straight) {
         return "役はストレートです";
     }
-    if($max2 == 3){
+    if ($max2 == 3) {
         return "役はスリーカードです";
     }
-    if($max3 == 2){
+    if ($max3 == 2) {
         return "役はツーペアです";
     }
-    if($max2 == 2){
+    if ($max2 == 2) {
         return "役はワンペアです";
     } else {
         return "役はなしです";
@@ -169,14 +172,14 @@ for($i = 0 ; $i <= 4 ; $i ++){
                         <p>
                             <?php echo $i . ":" ?>
                         </p>
-                        <select name= "<?php echo 'suit'.$i; ?>">
+                        <select name="<?php echo 'suit' . $i; ?>">
                             <option value=""></option>
                             <option value="spade">spade</option>
                             <option value="diamond">diamond</option>
                             <option value="heart">heart</option>
                             <option value="club">club</option>
                         </select>
-                        <select name= "<?php echo 'number'.$i; ?>" >
+                        <select name="<?php echo 'number' . $i; ?>">
                             <option value=""></option>
                             <option value="1">1</option>
                             <option value="2">2</option>
@@ -193,10 +196,10 @@ for($i = 0 ; $i <= 4 ; $i ++){
                             <option value="13">13</option>
                         </select>
                     </div>
-                <?php 
-                array_push($handsuit, tehuda_suit($i));
-                array_push($handnum, tehuda_number($i));
-                array_push($hand_arr, hand($i));
+                    <?php
+                    array_push($handsuit, tehuda_suit($i));
+                    array_push($handnum, tehuda_number($i));
+                    array_push($hand_arr, hand($i));
                 } ?>
                 <button type="submit" class="button1" name="submit">判定</button>
             </div>
