@@ -218,7 +218,9 @@ function judge($handsuit, $handnum, $hand_arr)
                 <!-- 引数の仕様有無は各自の判断に任せるとする。-->
                 <p>
                     <?php
-                    echo judge($handsuit, $handnum, $hand_arr);
+                    if(isset($_POST['submit'])){
+                        echo judge($handsuit, $handnum, $hand_arr);
+                    }
                     ?>
                 </p>
             </div>
